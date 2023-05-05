@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './counterSlice.js';
+import exchangeRatesReducer from './exchangeRatesSlice.js';
 
 const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    exchangeRates: exchangeRatesReducer,
   },
 });
 

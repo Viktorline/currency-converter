@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import Header from './pages/Header.jsx';
 
 const CurrencyConverter = lazy(() => import('./pages/CurrencyConverter'));
 const ExchangeRates = lazy(() => import('./pages/ExchangeRates'));
@@ -7,6 +8,7 @@ const ExchangeRates = lazy(() => import('./pages/ExchangeRates'));
 function AppRoutes() {
   return (
     <Router>
+      <Header />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/exchange" element={<ExchangeRates />} />
