@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { convertCurrency } from '../utils/index.js';
+import { fetchExchangeRates } from '../slices/exchangeRatesSlice.js';
+import { converter } from '../utils/converter.js';
 
 const CurrencyConverter = () => {
   const exchangeRates = useSelector((state) => state.exchangeRates.data.rates);
+  const baseRate = useSelector((state) => state.exchangeRates.base);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [amount, setAmount] = useState('');
-  const [fromCurrency, setFromCurrency] = useState('USD');
-  const [toCurrency, setToCurrency] = useState('USD');
+  const [fromCurrency, setFromCurrency] = useState(baseRate);
+  const [toCurrency, setToCurrency] = useState(baseRate);
   const [convertedAmount, setConvertedAmount] = useState('');
 
+  const status = useSelector((state) => state.exchangeRates.status);
+
   useEffect(() => {
-    const newAmount = convertCurrency(amount, fromCurrency, toCurrency, exchangeRates);
+    if (!exchangeRates) {
+      dispatch(fetchExchangeRates());
+    }
+  }, [status, dispatch, exchangeRates]);
+
+  useEffect(() => {
+    const newAmount = converter(amount, fromCurrency, toCurrency, exchangeRates);
     setConvertedAmount(newAmount);
   }, [amount, fromCurrency, toCurrency, exchangeRates]);
 
@@ -32,6 +43,10 @@ const CurrencyConverter = () => {
   const handleToCurrencyChange = (e) => {
     setToCurrency(e.target.value);
   };
+
+  if (!exchangeRates) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>

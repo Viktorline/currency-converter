@@ -1,30 +1,31 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { combiner } from '../utils/combiner.js';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-export const fetchExchangeRates = createAsyncThunk('exchangeRates/fetchExchangeRates', async () => {
-  const ratesResponse = await fetch(
-    `https://openexchangerates.org/api/latest.json?app_id=${API_KEY}`,
-  );
-  const ratesData = await ratesResponse.json();
+export const fetchExchangeRates = createAsyncThunk(
+  'exchangeRates/fetchExchangeRates',
+  async (base = 'United States Dollar') => {
+    const currenciesResponse = await fetch('https://openexchangerates.org/api/currencies.json');
+    const currenciesData = await currenciesResponse.json();
 
-  const currenciesResponse = await fetch('https://openexchangerates.org/api/currencies.json');
-  const currenciesData = await currenciesResponse.json();
+    const ratesResponse = await fetch(
+      `https://openexchangerates.org/api/latest.json?app_id=${API_KEY}`,
+    );
+    const ratesData = await ratesResponse.json();
 
-  const combinedData = {
-    base: ratesData.base,
-    rates: ratesData.rates,
-    currencies: currenciesData,
-  };
+    const combinedData = {
+      base: ratesData.base,
+      rates: combiner(currenciesData, ratesData.rates) ?? null,
+    };
 
-  console.log(combinedData);
-
-  return combinedData;
-});
+    return combinedData;
+  },
+);
 
 const exchangeRatesSlice = createSlice({
   name: 'exchangeRates',
-  initialState: { data: {}, status: 'idle', error: null },
+  initialState: { data: {}, status: 'idle', error: null, base: 'United States Dollar' },
   reducers: {},
   extraReducers: (builder) => {
     builder

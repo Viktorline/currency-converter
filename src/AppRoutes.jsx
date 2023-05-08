@@ -13,7 +13,7 @@ function AppRoutes() {
         <Routes>
           <Route path="/exchange" element={<ExchangeRates />} />
           <Route path="/convert" element={<CurrencyConverter />} />
-          <Route path="/" element={<Navigate to="/exchange" replace />} />
+          <Route path="/" element={<Navigate to="/convert" replace />} />
         </Routes>
       </Suspense>
     </Router>

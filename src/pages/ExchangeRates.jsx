@@ -10,11 +10,16 @@ const ExchangeRates = () => {
   const exchangeRates = useSelector((state) => state.exchangeRates.data);
   const status = useSelector((state) => state.exchangeRates.status);
   const error = useSelector((state) => state.exchangeRates.error);
+  const baseRate = useSelector((state) => state.exchangeRates.base);
+
   useEffect(() => {
+    if (!exchangeRates) {
+      dispatch(fetchExchangeRates());
+    }
     if (status === 'idle') {
       dispatch(fetchExchangeRates());
     }
-  }, [status, dispatch]);
+  }, [exchangeRates, status, dispatch]);
 
   const goToCurrencyConverter = () => {
     navigate('/convert');
@@ -23,6 +28,7 @@ const ExchangeRates = () => {
   return (
     <div>
       <h1>Exchange Rates</h1>
+      <h4>Your currency: {baseRate}</h4>
       <button onClick={goToCurrencyConverter}>Go to Currency Converter</button>
       {status === 'loading' && <div>Loading...</div>}
       {status === 'succeeded' &&
