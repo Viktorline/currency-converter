@@ -10,7 +10,6 @@ const ExchangeRates = () => {
   const exchangeRates = useSelector((state) => state.exchangeRates.data);
   const status = useSelector((state) => state.exchangeRates.status);
   const error = useSelector((state) => state.exchangeRates.error);
-
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchExchangeRates());
@@ -24,6 +23,7 @@ const ExchangeRates = () => {
   return (
     <div>
       <h1>Exchange Rates</h1>
+      <button onClick={goToCurrencyConverter}>Go to Currency Converter</button>
       {status === 'loading' && <div>Loading...</div>}
       {status === 'succeeded' &&
         Object.entries(exchangeRates.rates).map(([currency, rate]) => (
@@ -32,7 +32,6 @@ const ExchangeRates = () => {
           </div>
         ))}
       {status === 'failed' && <div>{error}</div>}
-      <button onClick={goToCurrencyConverter}>Go to Currency Converter</button>
     </div>
   );
 };

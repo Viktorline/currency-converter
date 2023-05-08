@@ -1,16 +1,30 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 export const fetchExchangeRates = createAsyncThunk('exchangeRates/fetchExchangeRates', async () => {
-  const response = await fetch('https://api.frankfurter.app/latest');
-  const data = await response.json();
-  console.log('update!');
-  console.log(data);
-  return data;
+  const ratesResponse = await fetch(
+    `https://openexchangerates.org/api/latest.json?app_id=${API_KEY}`,
+  );
+  const ratesData = await ratesResponse.json();
+
+  const currenciesResponse = await fetch('https://openexchangerates.org/api/currencies.json');
+  const currenciesData = await currenciesResponse.json();
+
+  const combinedData = {
+    base: ratesData.base,
+    rates: ratesData.rates,
+    currencies: currenciesData,
+  };
+
+  console.log(combinedData);
+
+  return combinedData;
 });
 
 const exchangeRatesSlice = createSlice({
   name: 'exchangeRates',
-  initialState: { data: {}, status: 'idle', error: null, baseCurrency: 'EUR' },
+  initialState: { data: {}, status: 'idle', error: null },
   reducers: {},
   extraReducers: (builder) => {
     builder
