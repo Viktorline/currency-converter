@@ -1,8 +1,12 @@
+import { Button, InputNumber, Select, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { changeBase, fetchExchangeRates } from '../slices/exchangeRatesSlice.js';
 import { converter } from '../utils/converter.js';
+
+const { Option } = Select;
+const { Title } = Typography;
 
 const CurrencyConverter = () => {
   const exchangeRates = useSelector((state) => state.exchangeRates.data.rates);
@@ -32,19 +36,18 @@ const CurrencyConverter = () => {
     navigate('/exchange');
   };
 
-  const handleAmountChange = (e) => {
-    setAmount(e.target.value);
+  const handleAmountChange = (value) => {
+    setAmount(value);
   };
 
-  const handleFromCurrencyChange = (e) => {
-    const newBase = e.target.value;
-    setFromCurrency(newBase);
-    dispatch(changeBase(newBase));
-    dispatch(fetchExchangeRates(newBase));
+  const handleFromCurrencyChange = (value) => {
+    setFromCurrency(value);
+    dispatch(changeBase(value));
+    dispatch(fetchExchangeRates(value));
   };
 
-  const handleToCurrencyChange = (e) => {
-    setToCurrency(e.target.value);
+  const handleToCurrencyChange = (value) => {
+    setToCurrency(value);
   };
 
   if (!exchangeRates) {
@@ -53,32 +56,39 @@ const CurrencyConverter = () => {
 
   return (
     <div>
-      <h1>Currency Converter</h1>
-      <button onClick={goToExchange}>Go to Exchange</button>
+      <Title level={2}>Converter</Title>
+      <Button type="primary" onClick={goToExchange}>
+        Go to Exchange
+      </Button>
       <div>
-        <input
+        <InputNumber
           type="number"
           value={amount}
           onChange={handleAmountChange}
           placeholder="Enter amount"
         />
-        <select value={fromCurrency} onChange={handleFromCurrencyChange}>
+        <Select value={fromCurrency} onChange={handleFromCurrencyChange}>
           {Object.keys(exchangeRates).map((currency) => (
-            <option key={currency} value={currency}>
+            <Option key={currency} value={currency}>
               {currency}
-            </option>
+            </Option>
           ))}
-        </select>
+        </Select>
       </div>
       <div>
-        <input type="number" value={convertedAmount} readOnly placeholder="Converted amount" />
-        <select value={toCurrency} onChange={handleToCurrencyChange}>
+        <InputNumber
+          type="number"
+          value={convertedAmount}
+          readOnly
+          placeholder="Converted amount"
+        />
+        <Select value={toCurrency} onChange={handleToCurrencyChange}>
           {Object.keys(exchangeRates).map((currency) => (
-            <option key={currency} value={currency}>
+            <Option key={currency} value={currency}>
               {currency}
-            </option>
+            </Option>
           ))}
-        </select>
+        </Select>
       </div>
     </div>
   );

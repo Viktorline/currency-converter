@@ -1,7 +1,11 @@
+import { Button, List, Select, Typography } from 'antd';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { changeBase, fetchExchangeRates } from '../slices/exchangeRatesSlice.js';
+
+const { Option } = Select;
+const { Title } = Typography;
 
 const ExchangeRates = () => {
   const navigate = useNavigate();
@@ -25,31 +29,38 @@ const ExchangeRates = () => {
     navigate('/convert');
   };
 
-  const handleBaseChange = (e) => {
-    dispatch(changeBase(e.target.value));
+  const handleBaseChange = (value) => {
+    dispatch(changeBase(value));
     dispatch(fetchExchangeRates());
   };
 
   return (
     <div>
-      <h1>Exchange Rates</h1>
-      <h4>Your currency: {baseRate}</h4>
-      <button onClick={goToCurrencyConverter}>Go to Currency Converter</button>
+      <Title level={2}>Exchange Rates</Title>
+      <Title level={5}>Your currency: {baseRate}</Title>
+      <Button type="primary" onClick={goToCurrencyConverter}>
+        Go to Currency Converter
+      </Button>
       {status === 'loading' && <div>Loading...</div>}
       {status === 'succeeded' && exchangeRates && exchangeRates.rates && (
         <div>
-          <select value={baseRate} onChange={handleBaseChange}>
+          <Select value={baseRate} onChange={handleBaseChange}>
             {Object.keys(exchangeRates.rates).map((currency) => (
-              <option key={currency} value={currency}>
+              <Option key={currency} value={currency}>
                 {currency}
-              </option>
+              </Option>
             ))}
-          </select>
-          {Object.entries(exchangeRates.rates).map(([currency, rate]) => (
-            <div key={currency}>
-              {currency}: {rate}
-            </div>
-          ))}
+          </Select>
+          <List
+            size="large"
+            bordered
+            dataSource={Object.entries(exchangeRates.rates)}
+            renderItem={([currency, rate]) => (
+              <List.Item>
+                <strong>{currency}</strong>: {rate}
+              </List.Item>
+            )}
+          />
         </div>
       )}
       {status === 'failed' && <div>{error}</div>}
