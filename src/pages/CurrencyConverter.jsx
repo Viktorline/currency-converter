@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { fetchExchangeRates } from '../slices/exchangeRatesSlice.js';
+import { changeBase, fetchExchangeRates } from '../slices/exchangeRatesSlice.js';
 import { converter } from '../utils/converter.js';
 
 const CurrencyConverter = () => {
@@ -37,7 +37,10 @@ const CurrencyConverter = () => {
   };
 
   const handleFromCurrencyChange = (e) => {
-    setFromCurrency(e.target.value);
+    const newBase = e.target.value;
+    setFromCurrency(newBase);
+    dispatch(changeBase(newBase));
+    dispatch(fetchExchangeRates(newBase));
   };
 
   const handleToCurrencyChange = (e) => {

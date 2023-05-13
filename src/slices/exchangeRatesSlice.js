@@ -6,18 +6,31 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 export const fetchExchangeRates = createAsyncThunk(
   'exchangeRates/fetchExchangeRates',
   async (base = 'United States Dollar') => {
-    const currenciesResponse = await fetch('https://openexchangerates.org/api/currencies.json');
-    const currenciesData = await currenciesResponse.json();
-
     const ratesResponse = await fetch(
       `https://openexchangerates.org/api/latest.json?app_id=${API_KEY}`,
     );
     const ratesData = await ratesResponse.json();
 
-    const combinedData = {
+    const currenciesResponse = await fetch('https://openexchangerates.org/api/currencies.json');
+    const currenciesData = await currenciesResponse.json();
+
+    let combinedData = {
       base: ratesData.base,
       rates: combiner(currenciesData, ratesData.rates) ?? null,
     };
+
+    if (base !== 'United States Dollar') {
+      const baseRateInUSD = combinedData.rates[base];
+      combinedData = {
+        base: base,
+        rates: Object.fromEntries(
+          Object.entries(combinedData.rates).map(([currency, rate]) => [
+            currency,
+            rate / baseRateInUSD,
+          ]),
+        ),
+      };
+    }
 
     return combinedData;
   },
@@ -26,7 +39,11 @@ export const fetchExchangeRates = createAsyncThunk(
 const exchangeRatesSlice = createSlice({
   name: 'exchangeRates',
   initialState: { data: {}, status: 'idle', error: null, base: 'United States Dollar' },
-  reducers: {},
+  reducers: {
+    changeBase: (state, action) => {
+      state.base = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchExchangeRates.pending, (state) => {
@@ -43,4 +60,5 @@ const exchangeRatesSlice = createSlice({
   },
 });
 
+export const { changeBase } = exchangeRatesSlice.actions;
 export default exchangeRatesSlice.reducer;

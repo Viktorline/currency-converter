@@ -13,5 +13,5 @@ export const converter = (amount, fromCurrency, toCurrency, exchangeRates) => {
   const baseAmount = amount / fromRate;
   const convertedAmount = baseAmount * toRate;
 
-  return convertedAmount.toFixed(2);
+  return parseFloat(convertedAmount).toPrecision(6);
 };
