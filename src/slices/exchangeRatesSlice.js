@@ -26,7 +26,7 @@ export const fetchExchangeRates = createAsyncThunk(
         rates: Object.fromEntries(
           Object.entries(combinedData.rates).map(([currency, rate]) => [
             currency,
-            (rate / baseRateInUSD).toFixed(2),
+            rate / baseRateInUSD,
           ]),
         ),
       };
