@@ -2,6 +2,7 @@ import { Button, InputNumber, Select, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import '../assets/styles/index.sass';
 import { changeBase, fetchExchangeRates } from '../slices/exchangeRatesSlice.js';
 import { converter } from '../utils/converter.js';
 
@@ -55,7 +56,7 @@ const CurrencyConverter = () => {
   }
 
   return (
-    <div>
+    <div className="content">
       <Title level={2}>Converter</Title>
       <Button type="primary" onClick={goToExchange}>
         Go to Exchange

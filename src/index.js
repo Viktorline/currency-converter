@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import app from './application.jsx';
-import './index.css';
+import './assets/styles/index.sass';
 
 const run = async () => {
   const root = ReactDOM.createRoot(document.getElementById('main'));

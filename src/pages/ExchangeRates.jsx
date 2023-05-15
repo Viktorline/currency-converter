@@ -35,7 +35,7 @@ const ExchangeRates = () => {
   };
 
   return (
-    <div>
+    <div className="content">
       <Title level={2}>Exchange Rates</Title>
       <Title level={5}>Your currency: {baseRate}</Title>
       <Button type="primary" onClick={goToCurrencyConverter}>
@@ -54,6 +54,7 @@ const ExchangeRates = () => {
           <List
             size="large"
             bordered
+            className="list"
             dataSource={Object.entries(exchangeRates.rates)}
             renderItem={([currency, rate]) => (
               <List.Item>

@@ -1,0 +1,72 @@
+html,
+body 
+  margin: 0 
+  padding: 0 
+  font-family: 'Inter', Arial, sans-serif 
+  font-size: 16px 
+  line-height: 1.4 
+  color: #fff 
+  height: 100% 
+  background-color: #59585d 
+
+
+* 
+  box-sizing: border-box 
+
+
+.container 
+  max-width: 1200px 
+  width: 100%
+  margin: 0 auto 
+  padding: 0 3% 
+
+
+.page 
+  display: flex 
+  flex-direction: column 
+  justify-content: space-between 
+  min-height: 100vh 
+  padding: 20px 0 
+  background-color: #59585d 
+
+
+.main 
+  width: 100% 
+  max-width: 800px 
+  margin: 0 auto 
+  padding: 20px 
+  background-color: #0e100f 
+  border-radius: 25px 
+  color: #fff 
+
+
+.header 
+  text-align: center 
+
+
+.content 
+  overflow: auto 
+  padding: 20px 0 
+  height: calc(100vh - 180px) // adjusting for header and footer
+
+  // Styles for Ant Design components
+  .ant-btn 
+    margin: 10px 
+  
+
+  .ant-select,
+  .ant-input-number 
+    width: 100% 
+    margin: 10px 0 
+  
+
+  .ant-list-item 
+    padding: 10px 
+    border-bottom: 1px solid #fff 
+  
+
+
+.list 
+  max-height: 300px 
+  overflow: auto 
+

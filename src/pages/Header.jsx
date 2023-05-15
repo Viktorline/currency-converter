@@ -9,7 +9,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   return (
-    <header>
+    <header className="header">
       <Title level={1}>Currency Converter App</Title>
       <Button type="dashed" onClick={() => dispatch(fetchExchangeRates())}>
         Update Exchange Rates
