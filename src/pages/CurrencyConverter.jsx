@@ -1,7 +1,6 @@
-import { Button, InputNumber, Select, Typography } from 'antd';
+import { InputNumber, Select, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import '../assets/styles/index.sass';
 import { changeBase, fetchExchangeRates } from '../slices/exchangeRatesSlice.js';
 import { converter } from '../utils/converter.js';
@@ -14,7 +13,6 @@ const CurrencyConverter = () => {
   const baseRate = useSelector((state) => state.exchangeRates.base);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [amount, setAmount] = useState('');
   const [fromCurrency, setFromCurrency] = useState(baseRate);
   const [toCurrency, setToCurrency] = useState(baseRate);
@@ -32,10 +30,6 @@ const CurrencyConverter = () => {
     const newAmount = converter(amount, fromCurrency, toCurrency, exchangeRates);
     setConvertedAmount(newAmount);
   }, [amount, fromCurrency, toCurrency, exchangeRates]);
-
-  const goToExchange = () => {
-    navigate('/exchange');
-  };
 
   const handleAmountChange = (value) => {
     setAmount(value);
@@ -58,9 +52,6 @@ const CurrencyConverter = () => {
   return (
     <div className="content">
       <Title level={2}>Converter</Title>
-      <Button type="primary" onClick={goToExchange}>
-        Go to Exchange
-      </Button>
       <div>
         <InputNumber
           type="number"

@@ -1,14 +1,12 @@
-import { Button, List, Select, Typography } from 'antd';
+import { List, Select, Typography } from 'antd';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { changeBase, fetchExchangeRates } from '../slices/exchangeRatesSlice.js';
 
 const { Option } = Select;
 const { Title } = Typography;
 
 const ExchangeRates = () => {
-  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const exchangeRates = useSelector((state) => state.exchangeRates.data);
@@ -25,9 +23,7 @@ const ExchangeRates = () => {
     }
   }, [exchangeRates, status, dispatch]);
 
-  const goToCurrencyConverter = () => {
-    navigate('/convert');
-  };
+
 
   const handleBaseChange = (value) => {
     dispatch(changeBase(value));
@@ -38,9 +34,7 @@ const ExchangeRates = () => {
     <div className="content">
       <Title level={2}>Exchange Rates</Title>
       <Title level={5}>Your currency: {baseRate}</Title>
-      <Button type="primary" onClick={goToCurrencyConverter}>
-        Go to Currency Converter
-      </Button>
+
       {status === 'loading' && <div>Loading...</div>}
       {status === 'succeeded' && exchangeRates && exchangeRates.rates && (
         <div>
