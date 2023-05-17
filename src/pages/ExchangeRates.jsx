@@ -27,7 +27,7 @@ const ExchangeRates = () => {
 
   const handleBaseChange = (value) => {
     dispatch(changeBase(value));
-    dispatch(fetchExchangeRates());
+    dispatch(fetchExchangeRates(value));
   };
 
   return (
