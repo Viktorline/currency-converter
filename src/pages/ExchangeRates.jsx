@@ -34,7 +34,6 @@ const ExchangeRates = () => {
     <div className="content">
       <Title level={2}>Exchange Rates</Title>
       <Title level={5}>Your currency: {baseRate}</Title>
-
       {status === 'loading' && <div>Loading...</div>}
       {status === 'succeeded' && exchangeRates && exchangeRates.rates && (
         <div>

@@ -22,14 +22,14 @@ const Header = () => {
   return (
     <header className="header">
       <Title level={1}>Currency Converter App</Title>
-      <Button type="dashed" onClick={() => dispatch(fetchExchangeRates())}>
-        Update Exchange Rates
-      </Button>
       <Button type="primary" onClick={goToCurrencyConverter}>
         Go to Currency Converter
       </Button>
       <Button type="primary" onClick={goToExchange}>
         Go to Exchange
+      </Button>
+      <Button type="dashed" onClick={() => dispatch(fetchExchangeRates())}>
+        Update Exchange Rates
       </Button>
     </header>
   );
