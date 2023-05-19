@@ -1,7 +1,6 @@
 import { InputNumber, Select } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import '../assets/styles/index.sass';
 import { changeBase, fetchExchangeRates } from '../slices/exchangeRatesSlice.js';
 import { converter } from '../utils/converter.js';
 
@@ -58,6 +57,7 @@ const CurrencyConverter = () => {
           <div>
             <InputNumber
               type="number"
+              name="amount"
               value={amount}
               onChange={handleAmountChange}
               placeholder="Enter amount"
@@ -72,6 +72,7 @@ const CurrencyConverter = () => {
           </div>
           <div>
             <InputNumber
+              name="converted-amount"
               type="number"
               value={convertedAmount}
               readOnly

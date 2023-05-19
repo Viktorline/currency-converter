@@ -18,7 +18,7 @@ const Header = () => {
 
   return (
     <header className="header">
-      <h1>Currency Converter</h1>
+      <h1 className="logo">Currency Converter</h1>
       <div className="buttongroup">
         <button
           className={location.pathname === '/convert' ? 'pageOn' : 'pageOff'}

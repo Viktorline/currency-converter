@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap"')
-  
 $maincolor: #2F44C2
 $secondmaincolor: #1C154E
 $maincontent: rgba(#100B2D, 1) 
 $maincontentdark: rgba(#0a071d, 1) 
-
+$hoveredColor: lighten($maincontent, 3%)
 $textcolor: #fff
 
 html,
@@ -45,23 +43,33 @@ body
   text-align: center 
   font-size: 26px 
 
+.logo
+  cursor: default
+
+
 .buttongroup
   width: 100% 
   max-width: 600px 
   margin: 0 auto 
   display: flex
 
+
   button 
+    cursor: pointer
     color: $textcolor
     border: none
     padding: 10px
     flex-grow: 1
     text-align: center
-    font-size: 17px
+    font-size: 20px
+    font-family: Georgia serif
+
+    font-weight: bold
     justify-self: start
     // border-radius: 10px 10px 0 0    
-
-
+    
+    &:hover
+      background: $hoveredColor
   
   .reloadbutton 
     flex-grow: 0
@@ -69,6 +77,8 @@ body
     padding: 5px
     background-color: $maincontent
 
+    &:hover
+      background: $hoveredColor
 
 
 
