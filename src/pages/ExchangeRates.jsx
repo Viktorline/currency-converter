@@ -40,7 +40,12 @@ const ExchangeRates = () => {
       {status === 'loading' && <div>Loading...</div>}
       {status === 'succeeded' && exchangeRates && (
         <div>
-          <div className="exchange">
+          <form
+            className="exchange"
+            onSubmit={(event) => {
+              event.preventDefault();
+            }}
+          >
             <Select
               showSearch
               value={baseRate}
@@ -61,7 +66,7 @@ const ExchangeRates = () => {
               onChange={handleSearchChange}
               autoComplete="off"
             />
-          </div>
+          </form>
           <List
             size="large"
             bordered

@@ -60,7 +60,12 @@ const CurrencyConverter = () => {
       {status === 'loading' && <div>Loading...</div>}
       {status === 'succeeded' && (
         <div className="converter-block">
-          <div className="converter">
+          <form
+            className="converter"
+            onSubmit={(event) => {
+              event.preventDefault();
+            }}
+          >
             <InputNumber
               type="number"
               name="amount"
@@ -82,11 +87,16 @@ const CurrencyConverter = () => {
                 </Option>
               ))}
             </Select>
-          </div>
+          </form>
           <Button className="swap-button" onClick={handleSwapCurrencies}>
             &#x21c5;
           </Button>
-          <div className="converter">
+          <form
+            className="converter"
+            onSubmit={(event) => {
+              event.preventDefault();
+            }}
+          >
             <InputNumber
               name="converted-amount"
               type="number"
@@ -108,7 +118,7 @@ const CurrencyConverter = () => {
                 </Option>
               ))}
             </Select>
-          </div>
+          </form>
         </div>
       )}
       {status === 'failed' && <div>{error}</div>}
