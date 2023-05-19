@@ -29,8 +29,7 @@ const ExchangeRates = () => {
 
   return (
     <div className="content">
-      <h2 level={2}>Exchange Rates</h2>
-      <h5 level={5}>Your currency: {baseRate}</h5>
+      <h3>Your currency: {baseRate}</h3>
       {status === 'loading' && <div>Loading...</div>}
       {status === 'succeeded' && exchangeRates && (
         <div>

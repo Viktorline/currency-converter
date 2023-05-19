@@ -1,5 +1,5 @@
-$maincolor: #2F44C2
-$secondmaincolor: #1C154E
+$maincolor: #00d4ff
+$secondmaincolor: #110041
 $maincontent: rgba(#100B2D, 1) 
 $maincontentdark: rgba(#0a071d, 1) 
 $hoveredColor: lighten($maincontent, 3%)
@@ -75,44 +75,48 @@ body
     flex-grow: 0
     font-size: 25px
     padding: 5px
-    background-color: $maincontent
+    background-color: $maincontentdark
 
     &:hover
       background: $hoveredColor
 
 
-
-
-
-
 .pageOn 
   background: $maincontent
   
-
 .pageOff 
   background: $maincontentdark
 
-
-
 .content 
   overflow: auto 
-  padding: 20px 0 
+  padding: 0
 
   //Ant Design components
-  .ant-btn 
-    margin: 10px 
-
-  .ant-select,
+  
+  .ant-select
+    width: 100% 
+    margin: 10px 0 
+    
   .ant-input-number 
     width: 100% 
     margin: 10px 0 
+    background-color: $maincontentdark
+    border: 1px solid white
+    color: #ffffff
 
   .ant-list-item 
     padding: 20px 
     border-bottom: 1px solid #2220a8 
-    background-color: #fff
-
+    background-color: #2b7824
+  
 
 .list 
   max-height: 300px 
   overflow: auto 
+
+.converter 
+  display: flex
+  justify-content: space-around
+
+  > *
+    max-width: 270px

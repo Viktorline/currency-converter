@@ -50,11 +50,10 @@ const CurrencyConverter = () => {
 
   return (
     <div className="content">
-      <h2>Converter</h2>
       {status === 'loading' && <div>Loading...</div>}
       {status === 'succeeded' && (
         <div>
-          <div>
+          <div className="converter">
             <InputNumber
               type="number"
               name="amount"
@@ -62,7 +61,14 @@ const CurrencyConverter = () => {
               onChange={handleAmountChange}
               placeholder="Enter amount"
             />
-            <Select value={fromCurrency} onChange={handleFromCurrencyChange}>
+            <Select
+              showSearch
+              value={fromCurrency}
+              onChange={handleFromCurrencyChange}
+              filterOption={(input, option) =>
+                option.children.toLowerCase().startsWith(input.toLowerCase())
+              }
+            >
               {Object.keys(exchangeRates).map((currency) => (
                 <Option key={currency} value={currency}>
                   {currency}
@@ -70,7 +76,7 @@ const CurrencyConverter = () => {
               ))}
             </Select>
           </div>
-          <div>
+          <div className="converter">
             <InputNumber
               name="converted-amount"
               type="number"
@@ -78,7 +84,14 @@ const CurrencyConverter = () => {
               readOnly
               placeholder="Converted amount"
             />
-            <Select value={toCurrency} onChange={handleToCurrencyChange}>
+            <Select
+              showSearch
+              value={toCurrency}
+              onChange={handleToCurrencyChange}
+              filterOption={(input, option) =>
+                option.children.toLowerCase().startsWith(input.toLowerCase())
+              }
+            >
               {Object.keys(exchangeRates).map((currency) => (
                 <Option key={currency} value={currency}>
                   {currency}
