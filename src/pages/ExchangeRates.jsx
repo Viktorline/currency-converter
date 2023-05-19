@@ -1,14 +1,13 @@
-import { List, Select, Typography } from 'antd';
+import { List, Select } from 'antd';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeBase, fetchExchangeRates } from '../slices/exchangeRatesSlice.js';
 
 const { Option } = Select;
-const { Title } = Typography;
 
 const ExchangeRates = () => {
-
   const dispatch = useDispatch();
+
   const exchangeRates = useSelector((state) => state.exchangeRates.data);
   const status = useSelector((state) => state.exchangeRates.status);
   const error = useSelector((state) => state.exchangeRates.error);
@@ -23,8 +22,6 @@ const ExchangeRates = () => {
     }
   }, [exchangeRates, status, dispatch]);
 
-
-
   const handleBaseChange = (value) => {
     dispatch(changeBase(value));
     dispatch(fetchExchangeRates(value));
@@ -32,10 +29,10 @@ const ExchangeRates = () => {
 
   return (
     <div className="content">
-      <Title level={2}>Exchange Rates</Title>
-      <Title level={5}>Your currency: {baseRate}</Title>
+      <h2 level={2}>Exchange Rates</h2>
+      <h5 level={5}>Your currency: {baseRate}</h5>
       {status === 'loading' && <div>Loading...</div>}
-      {status === 'succeeded' && exchangeRates && exchangeRates.rates && (
+      {status === 'succeeded' && exchangeRates && (
         <div>
           <Select value={baseRate} onChange={handleBaseChange}>
             {Object.keys(exchangeRates.rates).map((currency) => (

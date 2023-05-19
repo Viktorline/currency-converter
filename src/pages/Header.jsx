@@ -1,15 +1,12 @@
-import { Button, Typography } from 'antd';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchExchangeRates } from '../slices/exchangeRatesSlice';
-import { useNavigate } from 'react-router-dom';
-
-const { Title } = Typography;
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const location = useLocation();
 
   const goToCurrencyConverter = () => {
     navigate('/convert');
@@ -21,16 +18,24 @@ const Header = () => {
 
   return (
     <header className="header">
-      <Title level={1}>Currency Converter App</Title>
-      <Button type="primary" onClick={goToCurrencyConverter}>
-        Go to Currency Converter
-      </Button>
-      <Button type="primary" onClick={goToExchange}>
-        Go to Exchange
-      </Button>
-      <Button type="dashed" onClick={() => dispatch(fetchExchangeRates())}>
-        Update Exchange Rates
-      </Button>
+      <h1>Currency Converter</h1>
+      <div className="buttongroup">
+        <button
+          className={location.pathname === '/convert' ? 'pageOn' : 'pageOff'}
+          onClick={goToCurrencyConverter}
+        >
+          Convert
+        </button>
+        <button
+          className={location.pathname === '/exchange' ? 'pageOn' : 'pageOff'}
+          onClick={goToExchange}
+        >
+          Exchange
+        </button>
+        <button className="reloadbutton" onClick={() => dispatch(fetchExchangeRates())}>
+          &#x21BB;
+        </button>
+      </div>
     </header>
   );
 };

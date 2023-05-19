@@ -1,18 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap"')
+  
+$maincolor: #2F44C2
+$secondmaincolor: #1C154E
+$maincontent: rgba(#100B2D, 1) 
+$maincontentdark: rgba(#0a071d, 1) 
+
+$textcolor: #fff
+
 html,
 body 
   margin: 0 
   padding: 0 
-  font-family: 'Inter', Arial, sans-serif 
+  font-family: Georgia serif
   font-size: 16px 
   line-height: 1.4 
   color: #fff 
   height: 100% 
-  background-color: #59585d 
-
-
 * 
   box-sizing: border-box 
-
 
 .container 
   max-width: 1200px 
@@ -20,28 +25,63 @@ body
   margin: 0 auto 
   padding: 0 3% 
 
-
 .page 
   display: flex 
   flex-direction: column 
   justify-content: flex-start 
   min-height: 100vh 
   padding: 20px 0 
-  background-color: #ffffff 
-
+  background: linear-gradient(to top, $maincolor, $secondmaincolor , #221e42)
 
 .main 
   width: 100% 
   max-width: 600px 
   margin: 0 auto 
   padding: 20px 
-  background-color: #6866e291 
-  border-radius: 25px 
-  color: #fff 
-
+  border-radius: 0 0 10px 10px   
+  background: $maincontent
 
 .header 
   text-align: center 
+  font-size: 26px 
+
+.buttongroup
+  width: 100% 
+  max-width: 600px 
+  margin: 0 auto 
+  display: flex
+
+  button 
+    color: $textcolor
+    border: none
+    padding: 10px
+    flex-grow: 1
+    text-align: center
+    font-size: 17px
+    justify-self: start
+    // border-radius: 10px 10px 0 0    
+
+
+  
+  .reloadbutton 
+    flex-grow: 0
+    font-size: 25px
+    padding: 5px
+    background-color: $maincontent
+
+
+
+
+
+
+
+.pageOn 
+  background: $maincontent
+  
+
+.pageOff 
+  background: $maincontentdark
+
 
 
 .content 
@@ -51,18 +91,17 @@ body
   //Ant Design components
   .ant-btn 
     margin: 10px 
-  
 
   .ant-select,
   .ant-input-number 
     width: 100% 
     margin: 10px 0 
-  
 
   .ant-list-item 
-    padding: 10px 
-    border-bottom: 1px solid #fff 
-  
+    padding: 20px 
+    border-bottom: 1px solid #2220a8 
+    background-color: #fff
+
 
 .list 
   max-height: 300px 
