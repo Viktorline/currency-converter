@@ -1,21 +1,40 @@
 $maincolor: #00d4ff
 $secondmaincolor: #110041
-$maincontent: rgba(#100B2D, 1) 
+$maincontent: rgba(#100B2D, 0.7) 
 $maincontentdark: rgba(#0a071d, 1) 
 $hoveredColor: lighten($maincontent, 3%)
 $textcolor: #fff
+
 
 html,
 body 
   margin: 0 
   padding: 0 
   font-family: Georgia serif
-  font-size: 16px 
+  font-size: 18px 
   line-height: 1.4 
   color: #fff 
   height: 100% 
 * 
   box-sizing: border-box 
+
+::-webkit-scrollbar 
+  width: 10px
+
+::-webkit-scrollbar-track 
+  background: #141414
+  border-radius: 5px 
+
+::-webkit-scrollbar-thumb 
+  background: #fbfbfb
+  border-radius: 5px 
+
+::-webkit-scrollbar-thumb:hover 
+  background: #555
+
+* 
+  scrollbar-width: thin
+  scrollbar-color: #888 #f1f1f1
 
 .container 
   max-width: 1200px 
@@ -29,7 +48,8 @@ body
   justify-content: flex-start 
   min-height: 100vh 
   padding: 20px 0 
-  background: linear-gradient(to top, $maincolor, $secondmaincolor , #221e42)
+  background-color: #4834d4
+  background-image: linear-gradient(315deg, #3454d4 0%, #0c0c0c 90%)
 
 .main 
   width: 100% 
@@ -46,13 +66,11 @@ body
 .logo
   cursor: default
 
-
 .buttongroup
   width: 100% 
   max-width: 600px 
   margin: 0 auto 
   display: flex
-
 
   button 
     cursor: pointer
@@ -66,7 +84,6 @@ body
 
     font-weight: bold
     justify-self: start
-    // border-radius: 10px 10px 0 0    
     
     &:hover
       background: $hoveredColor
@@ -91,8 +108,7 @@ body
   overflow: auto 
   padding: 0
 
-  //Ant Design components
-  
+  .ant-input,
   .ant-select
     width: 100% 
     margin: 10px 0 
@@ -100,18 +116,17 @@ body
   .ant-input-number 
     width: 100% 
     margin: 10px 0 
-  //   background-color: $maincontentdark
-  //   border: 1px solid white
-  //   color: #ffffff
-
-  // .ant-list-item 
-  //   padding: 20px 
-  //   border-bottom: 1px solid #2220a8 
   
-
 .list 
   max-height: 300px 
   overflow: auto 
+
+.converter-block 
+  display: flex
+  flex-direction: column
+
+.swap-button 
+  align-self: center
 
 .converter 
   display: flex
@@ -119,3 +134,12 @@ body
 
   > *
     max-width: 270px
+
+.exchange 
+  display: flex
+  justify-content: space-between
+  
+  > *
+    max-width: 270px
+.exchange-header 
+  margin: 0

@@ -1,4 +1,4 @@
-import { InputNumber, Select } from 'antd';
+import { Button, InputNumber, Select } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeBase, fetchExchangeRates } from '../slices/exchangeRatesSlice.js';
@@ -44,6 +44,13 @@ const CurrencyConverter = () => {
     setToCurrency(value);
   };
 
+  const handleSwapCurrencies = () => {
+    setFromCurrency(toCurrency);
+    setToCurrency(fromCurrency);
+    dispatch(changeBase(toCurrency));
+    dispatch(fetchExchangeRates(toCurrency));
+  };
+
   if (!exchangeRates) {
     return <div>Loading...</div>;
   }
@@ -52,7 +59,7 @@ const CurrencyConverter = () => {
     <div className="content">
       {status === 'loading' && <div>Loading...</div>}
       {status === 'succeeded' && (
-        <div>
+        <div className="converter-block">
           <div className="converter">
             <InputNumber
               type="number"
@@ -76,6 +83,9 @@ const CurrencyConverter = () => {
               ))}
             </Select>
           </div>
+          <Button className="swap-button" onClick={handleSwapCurrencies}>
+            &#x21c5;
+          </Button>
           <div className="converter">
             <InputNumber
               name="converted-amount"
